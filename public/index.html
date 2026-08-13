@@ -1,0 +1,191 @@
+<title>Praneeth Labs — developer tools</title>
+<style>
+  :root {
+    --bg: #0a0c10;
+    --panel: #12151c;
+    --panel-2: #171b24;
+    --line: #232936;
+    --text: #e7ecf3;
+    --muted: #8b95a7;
+    --accent: #4ade80;
+    --accent-2: #38bdf8;
+    --shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 24px 60px -34px rgba(0,0,0,0.85);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f5f7f9; --panel: #fff; --panel-2: #eef1f4; --line: #e2e7ec;
+      --text: #0e141b; --muted: #5b6675; --accent: #16a34a; --accent-2: #0284c7;
+      --shadow: 0 1px 2px rgba(16,20,27,0.04), 0 24px 50px -34px rgba(16,20,27,0.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0a0c10; --panel:#12151c; --panel-2:#171b24; --line:#232936;
+    --text:#e7ecf3; --muted:#8b95a7; --accent:#4ade80; --accent-2:#38bdf8;
+    --shadow: 0 1px 0 rgba(255,255,255,0.03) inset, 0 24px 60px -34px rgba(0,0,0,0.85);
+  }
+  :root[data-theme="light"] {
+    --bg:#f5f7f9; --panel:#fff; --panel-2:#eef1f4; --line:#e2e7ec;
+    --text:#0e141b; --muted:#5b6675; --accent:#16a34a; --accent-2:#0284c7;
+    --shadow: 0 1px 2px rgba(16,20,27,0.04), 0 24px 50px -34px rgba(16,20,27,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); -webkit-font-smoothing: antialiased; line-height: 1.5;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: var(--mono); }
+  h1,h2,h3 { margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+
+  .field { position: relative; }
+  .field::before {
+    content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(circle at 50% -8%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 55%),
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 100% 100%, 46px 46px, 46px 46px; opacity:.5;
+    -webkit-mask-image: linear-gradient(var(--bg), transparent 65%);
+    mask-image: linear-gradient(var(--bg), transparent 65%);
+  }
+
+  header.top {
+    position: relative; z-index: 1;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 22px 0;
+  }
+  .logo { display:flex; align-items:center; gap:10px; font-weight:800; font-size:16px; }
+  .logo .dot {
+    width:22px; height:22px; border-radius:7px;
+    background: conic-gradient(from 210deg, var(--accent), var(--accent-2));
+    display:inline-block;
+  }
+  .top .contact { font-size:13px; color:var(--muted); text-decoration:none; }
+  .top .contact:hover { color: var(--text); }
+
+  .hero { position: relative; z-index:1; padding: clamp(40px, 8vw, 88px) 0 24px; }
+  .eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
+  .hero h1 { font-size: clamp(38px, 8vw, 76px); font-weight: 850; line-height: 1.0; margin: 16px 0 18px; }
+  .hero p { font-size: clamp(16px,1.7vw,19px); color: var(--muted); max-width: 52ch; margin:0; }
+
+  section { position: relative; z-index:1; padding: clamp(36px, 6vw, 60px) 0; }
+  .sec-label {
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--muted); margin-bottom: 18px;
+  }
+  hr.rule { border:0; height:1px; background: var(--line); margin:0; position:relative; z-index:1; }
+
+  .products { display:grid; gap:16px; }
+  .product {
+    display:grid; grid-template-columns: 1fr auto; gap: 18px; align-items:center;
+    background: var(--panel); border:1px solid var(--line); border-radius:16px;
+    padding: 24px; box-shadow: var(--shadow); text-decoration:none;
+    transition: border-color .15s, transform .15s;
+  }
+  .product.live:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .product .ptag {
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    padding:2px 9px; border-radius:6px; border:1px solid currentColor;
+  }
+  .ptag.live { color: var(--accent); }
+  .ptag.soon { color: var(--muted); }
+  .product h3 { font-size:20px; font-weight:750; margin-bottom:6px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .product p { margin:0; color:var(--muted); font-size:14.5px; max-width:56ch; }
+  .product .go {
+    font-family:var(--mono); font-size:13px; color:var(--accent); white-space:nowrap;
+  }
+  .product.soon { cursor: default; }
+  .product.soon h3, .product.soon .go { color: var(--muted); }
+
+  .about { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+  .about .card { background:var(--panel-2); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .about h4 { margin:0 0 6px; font-size:15px; }
+  .about p { margin:0; color:var(--muted); font-size:13.5px; }
+
+  footer {
+    position:relative; z-index:1; border-top:1px solid var(--line);
+    padding: 26px 0 48px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    color:var(--muted); font-family:var(--mono); font-size:12.5px;
+  }
+
+  @media (max-width:640px){
+    .product { grid-template-columns: 1fr; }
+    .product .go { justify-self:start; }
+    .about { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="field">
+  <div class="wrap">
+    <header class="top">
+      <div class="logo"><span class="dot"></span> Praneeth Labs</div>
+      <a class="contact" href="mailto:praneeth.thommandru@gmail.com">Get in touch →</a>
+    </header>
+
+    <div class="hero">
+      <span class="eyebrow">Developer tools studio</span>
+      <h1>Software that keeps software honest.</h1>
+      <p>We build focused tools that help developers catch problems — bugs, security holes, broken flows — before their customers ever do.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="rule"/>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Our products</div>
+    <div class="products">
+
+      <div class="product">
+        <div>
+          <h3>Software Health Inspector <span class="ptag soon">Desktop app</span></h3>
+          <p>The AI doctor for your software. It scans what you're building — a website, a code folder, or a running app — pinpoints exactly where it's going wrong, and hands back a graded report card with the fixes.</p>
+        </div>
+        <span class="go">Mac app · web version coming soon</span>
+      </div>
+
+      <a class="product live" href="https://stockwatcher.praneethlabs.com">
+        <div>
+          <h3>StockWatcher <span class="ptag live">Live</span></h3>
+          <p>Watch your stocks in real time — connect your trading account's API and track your portfolio as it moves.</p>
+        </div>
+        <span class="go">stockwatcher.praneethlabs.com →</span>
+      </a>
+
+      <a class="product live" href="https://vgrab.praneethlabs.com">
+        <div>
+          <h3>vgrab <span class="ptag live">Live</span></h3>
+          <p>Download from social media, and search a library of free courses — all in one place.</p>
+        </div>
+        <span class="go">vgrab.praneethlabs.com →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule"/>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">How we build</div>
+    <div class="about">
+      <div class="card"><h4>Runs on your machine</h4><p>Tools you install and own. Your code and data stay with you.</p></div>
+      <div class="card"><h4>Works offline</h4><p>No forced cloud. Optional local AI keeps everything private and free.</p></div>
+      <div class="card"><h4>Fixes, not just flags</h4><p>Every problem comes with a clear, copy-paste solution.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© Praneeth Labs</span>
+    <span>praneethlabs.com</span>
+  </div>
+</footer>
