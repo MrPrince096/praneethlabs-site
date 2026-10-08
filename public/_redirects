@@ -1,8 +1,8 @@
 # Cloudflare Pages redirects — block direct access to the repo's own
 # metadata/config files, which are otherwise served as static content
 # whenever the Pages build output directory is the repo root.
-/.git/*        /index.html  404
-/.gitignore    /index.html  404
-/.env          /index.html  404
-/.env.*        /index.html  404
-/README.md     /index.html  404
+/.git/*        /404.html  404
+/.gitignore    /404.html  404
+/.env          /404.html  404
+/.env.*        /404.html  404
+/README.md     /404.html  404

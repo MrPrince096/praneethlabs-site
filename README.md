@@ -1,26 +1,32 @@
 # Praneeth Labs
 
-Umbrella landing page for praneethlabs.com. Static single-page site — deploys to Cloudflare Pages.
-
-## ⚠️ Deploy config — action needed
-
-The site's HTML lives in **`public/`**. In the Cloudflare Pages project's
-**Settings → Builds & deployments → Build output directory**, set this to
-`public` (it was previously the repo root).
-
-This isn't cosmetic: with the output directory left at the repo root,
-Cloudflare Pages was serving the entire checkout as static files — including
-`.git/` itself. That meant `https://praneethlabs.com/.git/config` and
-`/.git/HEAD` were both publicly readable (confirmed live, 2026-08-13),
-exposing the repo's structure and history to anyone who checked. A
-`_redirects` rule now blocks `.git/*` and a few other sensitive paths as an
-immediate mitigation either way, but **switching the output directory to
-`public` is the actual fix** — once that's set, nothing outside `public/`
-(the repo's `.git`, this README, anything added later) is reachable at all.
+Umbrella site for praneethlabs.com — a small static site on Cloudflare Pages.
 
 ## Files
 
-- `public/index.html` — the actual served page
-- `public/_redirects` — Cloudflare Pages redirect/block rules
-- `index.html`, `_redirects` (repo root) — kept as a fallback only until the
-  output directory setting above is switched; safe to delete afterward
+Everything that's served lives in **`public/`**; nothing outside it is uploaded.
+
+- `index.html` — home page (product list)
+- `about.html`, `contact.html`, `privacy.html`, `terms.html` — served at
+  `/about`, `/contact`, `/privacy`, `/terms` (Pages strips `.html`)
+- `404.html` — returned with a real 404 status for unknown paths (without it,
+  Pages serves the home page for every URL)
+- `site.css` — shared styles for every page
+- `ads.txt`, `robots.txt`, `sitemap.xml`, `favicon.svg`
+- `_redirects` — blocks a few sensitive paths outright
+
+Every page carries the `google-adsense-account` meta tag; AdSense reviews this
+root domain for all `*.praneethlabs.com` products.
+
+## Deploy
+
+The Pages project `praneethlabs-clean` (serves praneethlabs.com and
+www.praneethlabs.com) is a direct upload, not git-connected:
+
+```bash
+npx --yes wrangler@latest pages deploy public --project-name praneethlabs-clean --branch main --commit-dirty=true
+```
+
+Note: a zone-level redirect rule in the Cloudflare dashboard currently sends
+`/ads.txt` to `paperfinder.praneethlabs.com/ads.txt` (same publisher line), so
+`public/ads.txt` is only served if that rule is removed.
