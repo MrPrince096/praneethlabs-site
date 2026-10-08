@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why we build software that runs on your machine — Praneeth Labs</title>
+<meta name="description" content="On local-first software: what it means, why keeping the work on your own device protects your data and your speed, and the trade-offs we accept for it.">
+<link rel="canonical" href="https://praneethlabs.com/journal/local-first-software">
+<meta name="google-adsense-account" content="ca-pub-8488516936671035">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Praneeth Labs">
+<meta property="og:title" content="Why we build software that runs on your machine">
+<meta property="og:description" content="What local-first software means, why it protects your data, and the trade-offs we accept for it.">
+<meta property="og:url" content="https://praneethlabs.com/journal/local-first-software">
+<meta name="theme-color" content="#0a0c10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f7f9" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Why we build software that runs on your machine","description":"On local-first software: what it means, why it protects your data, and the trade-offs we accept for it.","author":{"@type":"Organization","name":"Praneeth Labs"},"publisher":{"@type":"Organization","name":"Praneeth Labs"},"datePublished":"2026-10-08","mainEntityOfPage":"https://praneethlabs.com/journal/local-first-software"}
+</script>
+</head>
+<body>
+
+<div class="field">
+  <div class="wrap">
+    <header class="top">
+      <a class="logo" href="/"><span class="dot"></span> Praneeth Labs</a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#products">Products</a>
+        <a href="/about">About</a>
+        <a href="/journal" aria-current="page">Journal</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </header>
+    <div class="page">
+      <span class="eyebrow">Journal</span>
+      <h1>Why we build software that runs on your machine</h1>
+      <p class="lede">The default has quietly become “send everything to someone's cloud.” We build the other way where we can — and here's the thinking behind it.</p>
+      <p class="updated">Published 8 October 2026</p>
+    </div>
+  </div>
+</div>
+
+<hr class="rule"/>
+
+<div class="wrap">
+  <article class="prose">
+
+    <p>Open almost any app today and the first thing it wants is your account — and, with it, your files, your text, your activity, all shipped to a server you'll never see. Sometimes there's a good reason. Often there isn't; it's just the default now. When we build at Praneeth Labs, we try to resist that default and keep the work on your own device wherever it's possible.</p>
+
+    <h2>What “local-first” means</h2>
+    <p>Local-first software does its real work on the computer or phone in front of you, not on a remote server. Your files are opened, processed and saved on your machine. The network is used only when it genuinely adds something — downloading a result you asked for, say — not as the place your private data has to live by default.</p>
+    <p>It's a spectrum, not a switch. A tool that converts a PDF entirely in your browser is fully local. A desktop app that runs on your machine but checks for updates is mostly local. What matters is the direction: keep as much as possible on the user's side of the line.</p>
+
+    <h2>Why it's worth the effort</h2>
+    <ul>
+      <li><strong>Privacy.</strong> The safest place for your data is the place it never leaves. If a file is processed on your device and never uploaded, there's no copy on our servers to leak, subpoena, sell or lose.</li>
+      <li><strong>Speed.</strong> There's no round-trip to a data centre. The work happens where you are, so it feels instant.</li>
+      <li><strong>Ownership.</strong> Your files stay yours, in formats you control. You're not renting access to your own documents.</li>
+      <li><strong>It works offline.</strong> A tool that lives on your device keeps working on a plane, on bad hotel wi-fi, or the day a company's servers go down.</li>
+      <li><strong>Longevity.</strong> Cloud services get shut down. Software on your machine keeps running long after the company that made it has moved on.</li>
+    </ul>
+
+    <h2>The trade-offs we accept</h2>
+    <p>Local-first isn't free. You give up effortless sync across devices, you're limited by the device's own power, and some jobs — heavy AI models, huge datasets — really do need a server. We're honest about that: when one of our tools needs to send something to a server to work, its page says so plainly, rather than pretending everything is private when it isn't.</p>
+
+    <h2>How it shows up in our work</h2>
+    <p>Most of <a href="https://tools.praneethlabs.com" target="_blank" rel="noopener">PL Tools</a> runs right in your browser — your PDFs and images are processed on your device and never uploaded. Our desktop apps, like the Software Health Inspector, run on your own machine and scan your own code locally. And in <a href="https://paperfinder.praneethlabs.com" target="_blank" rel="noopener">PaperFinder</a>, the AI summaries are “bring your own key”: you paste your own API key, it stays in your browser, and your requests go straight to the model provider rather than through us.</p>
+
+    <p>None of this is about being purist for its own sake. It's a simple bet: most of the time, the best place for your data is with you. We build like we believe it.</p>
+
+    <p class="muted">Read more in the <a href="/journal">journal</a>, or see what we've built on the <a href="/#products">products page</a>.</p>
+
+  </article>
+</div>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Praneeth Labs</span>
+    <nav class="links" aria-label="Footer">
+      <a href="/about">About</a>
+      <a href="/journal">Journal</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
